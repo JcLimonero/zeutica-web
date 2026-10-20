@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
+// Vercel-native Next.js (App Router). Sin `output: "export"` para
+// aprovechar el runtime de Vercel (SSR/ISR disponibles si se necesitan).
+// El sitio sigue siendo estático en la práctica (formulario client-side).
 const nextConfig: NextConfig = {
-  // Static export for Cloudflare Pages (site is fully static / client-only form)
-  output: "export",
   images: {
     unoptimized: true,
   },
