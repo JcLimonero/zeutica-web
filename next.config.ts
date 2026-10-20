@@ -1,11 +1,9 @@
 import type { NextConfig } from "next";
 
-// Vercel-native Next.js (App Router). Sin `output: "export"` para
-// aprovechar el runtime de Vercel (SSR/ISR disponibles si se necesitan).
-// El sitio sigue siendo estático en la práctica (formulario client-side).
+// Vercel-native Next.js — Image Optimization enabled for local /public assets.
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
   },
   trailingSlash: true,
 };

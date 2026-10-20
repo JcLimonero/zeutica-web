@@ -772,26 +772,24 @@ p {
   transition: opacity 0.75s ease, transform 8s ease;
 }
 
+.hero-slide-photo {
+  background-color: #002433;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
       100deg,
-      rgba(0, 28, 40, 0.55) 0%,
-      rgba(0, 58, 79, 0.2) 48%,
-      transparent 100%
-    ),
-    repeating-linear-gradient(
-      -18deg,
-      transparent,
-      transparent 48px,
-      rgba(255, 255, 255, 0.02) 48px,
-      rgba(255, 255, 255, 0.02) 49px
+      rgba(0, 28, 40, 0.78) 0%,
+      rgba(0, 58, 79, 0.55) 42%,
+      rgba(0, 36, 51, 0.35) 100%
     );
 }
 
-.hero-slide::after {
+/* Decorative frames only on gradient (non-photo) slides */
+.hero-slide:not(.hero-slide-photo)::after {
   content: "";
   position: absolute;
   right: 8%;
@@ -803,7 +801,7 @@ p {
   pointer-events: none;
 }
 
-.hero-slide::before {
+.hero-slide:not(.hero-slide-photo)::before {
   content: "";
   position: absolute;
   right: 14%;
@@ -992,20 +990,28 @@ p {
 }
 
 .product-card-img {
+  position: relative;
   aspect-ratio: 1;
   background: linear-gradient(180deg, #fafafa 0%, #f0f4f6 100%);
   border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 14px;
   overflow: hidden;
-  padding: 16px;
 }
 
 .product-card-img svg {
   width: 88%;
   height: 88%;
+  margin: 6%;
+}
+
+.product-card-photo {
+  object-fit: contain;
+  padding: 12px;
+  transition: transform 0.35s ease;
+}
+
+.product-card:hover .product-card-photo {
+  transform: scale(1.04);
 }
 
 .product-card h3 {
@@ -1297,15 +1303,54 @@ p {
 
 /* Page hero (inner pages) */
 .page-hero {
+  position: relative;
   background: var(--px-ice);
   padding: 40px 0 36px;
   border-bottom: 1px solid var(--px-border);
+  overflow: hidden;
 }
 
 @media (min-width: 992px) {
   .page-hero {
     padding: 52px 0 44px;
   }
+}
+
+.page-hero-photo {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  color: white;
+  background: #003a4f;
+  border-bottom: none;
+}
+
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.45;
+}
+
+.page-hero-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(0, 36, 51, 0.88) 0%, rgba(0, 58, 79, 0.55) 55%, rgba(0, 58, 79, 0.35) 100%);
+  pointer-events: none;
+}
+
+.page-hero-photo .eyebrow {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.page-hero-photo h1 {
+  color: white;
+}
+
+.page-hero-photo p {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .page-hero h1 {
@@ -1563,6 +1608,23 @@ p {
   box-shadow: var(--px-shadow);
 }
 
+.sku-item-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  flex: 1;
+}
+
+.sku-thumb {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #f5f7f8;
+  flex-shrink: 0;
+}
+
 .sku-item h4 {
   font-size: 17px;
   margin: 0;
@@ -1571,6 +1633,22 @@ p {
 .sku-item .meta {
   font-size: 13px;
   color: var(--px-muted);
+}
+
+.about-photo {
+  border-radius: var(--px-radius);
+  overflow: hidden;
+  min-height: 280px;
+  background: var(--px-ice);
+  box-shadow: var(--px-shadow-soft);
+}
+
+.about-photo-img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  display: block;
 }
 
 /* Footer */
@@ -1894,6 +1972,19 @@ p {
   .pdf-strip {
     padding: 28px 32px;
   }
+}
+
+.pdf-strip-photo {
+  flex-shrink: 0;
+}
+
+.pdf-strip-thumb {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  background: var(--px-ice);
 }
 
 .pdf-strip h3 {

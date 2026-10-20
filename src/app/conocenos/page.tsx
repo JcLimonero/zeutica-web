@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -51,15 +52,16 @@ export default function ConocenosPage() {
               presencia en marketplaces (Mercado Libre y Amazon MX).
             </p>
           </div>
-          <div
-            style={{
-              borderRadius: 15,
-              minHeight: 280,
-              background:
-                "radial-gradient(circle at 60% 40%, rgba(115,183,51,.25), transparent 50%), linear-gradient(145deg, #003a4f, #0a5270 60%, #3a6db4)",
-            }}
-            aria-hidden
-          />
+          <div className="about-photo">
+            <Image
+              src="/corporate/conocenos-team.webp"
+              alt="Equipo y operación Zeutica"
+              width={1200}
+              height={1200}
+              className="about-photo-img"
+              sizes="(max-width: 900px) 100vw, 480px"
+            />
+          </div>
         </div>
       </section>
 

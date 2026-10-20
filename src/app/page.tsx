@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import ProductImage from "@/components/ProductImage";
 import {
   IconBeauty,
   IconChip,
@@ -13,9 +14,9 @@ import {
   IconQuality,
   IconRestaurant,
   IconSupport,
-  ProductPlaceholder,
   WhatsAppIcon,
 } from "@/components/Icons";
+import { FAMILY_IMAGES } from "@/lib/productImages";
 
 const WA = "https://wa.me/523351119740";
 const ML = "https://www.mercadolibre.com.mx/tienda/zeutica";
@@ -108,18 +109,19 @@ export default function HomePage() {
             Sin precios en sitio: solicita cotización o escríbenos por WhatsApp.
           </p>
           <div className="card-grid">
-            {FAMILIAS.map((f) => (
-              <article key={f.name} className="product-card">
-                <div className="product-card-img">
-                  <ProductPlaceholder label={f.key} />
-                </div>
-                <h3>{f.name}</h3>
-                <p>{f.desc}</p>
-                <Link href="/cotizaciones" className="btn btn-green btn-sm">
-                  Solicitar cotización
-                </Link>
-              </article>
-            ))}
+            {FAMILIAS.map((f) => {
+              const img = FAMILY_IMAGES[f.key];
+              return (
+                <article key={f.name} className="product-card">
+                  <ProductImage src={img.src} alt={img.alt} />
+                  <h3>{f.name}</h3>
+                  <p>{f.desc}</p>
+                  <Link href="/cotizaciones" className="btn btn-green btn-sm">
+                    Solicitar cotización
+                  </Link>
+                </article>
+              );
+            })}
           </div>
           <div style={{ textAlign: "center", marginTop: 36 }}>
             <Link href="/productos" className="btn btn-outline">
@@ -172,7 +174,7 @@ export default function HomePage() {
               className="media-teaser"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 70% 30%, rgba(115,183,51,.35), transparent 45%), linear-gradient(145deg, #003a4f 0%, #0a5270 55%, #164e6b 100%)",
+                  "linear-gradient(180deg, rgba(0,36,51,.25), rgba(0,36,51,.75)), url(/hero/teaser-catalog.webp)",
               }}
             >
               <div className="media-teaser-body">
@@ -187,7 +189,7 @@ export default function HomePage() {
               className="media-teaser"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 30% 70%, rgba(58,109,180,.4), transparent 50%), linear-gradient(160deg, #002433 0%, #003a4f 50%, #3a6db4 130%)",
+                  "linear-gradient(180deg, rgba(0,36,51,.2), rgba(0,36,51,.8)), url(/corporate/conocenos-team.webp)",
               }}
             >
               <div className="media-teaser-body">

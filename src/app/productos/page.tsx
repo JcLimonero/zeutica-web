@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ProductPlaceholder, WhatsAppIcon } from "@/components/Icons";
+import ProductImage from "@/components/ProductImage";
+import { WhatsAppIcon } from "@/components/Icons";
+import { FAMILY_IMAGES, SKU_IMAGES } from "@/lib/productImages";
 
 export const metadata: Metadata = {
   title: "Productos",
@@ -37,8 +40,13 @@ const SKUS = [
 export default function ProductosPage() {
   return (
     <>
-      <div className="page-hero">
-        <div className="container">
+      <div className="page-hero page-hero-photo">
+        <div
+          className="page-hero-bg"
+          style={{ backgroundImage: "url(/hero/teaser-catalog.webp)" }}
+          aria-hidden
+        />
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <span className="eyebrow">Catálogo informativo</span>
           <h1>Nuestros productos</h1>
           <p>
@@ -51,6 +59,15 @@ export default function ProductosPage() {
       <section className="section">
         <div className="container">
           <div className="pdf-strip">
+            <div className="pdf-strip-photo">
+              <Image
+                src="/corporate/catalog-preview-2.webp"
+                alt="Vista previa del catálogo Zeutica"
+                width={120}
+                height={80}
+                className="pdf-strip-thumb"
+              />
+            </div>
             <div>
               <h3>Catálogo Zeutica 2026</h3>
               <p>Consulta el flipbook / PDF en el sitio actual o solicítalo por correo.</p>
@@ -79,21 +96,22 @@ export default function ProductosPage() {
             Categorías de oferta
           </h2>
           <div className="card-grid">
-            {FAMILIAS.map((f) => (
-              <article key={f.name} className="product-card">
-                <div className="product-card-img">
-                  <ProductPlaceholder label={f.key} />
-                </div>
-                <p className="meta" style={{ fontSize: 12, fontWeight: 600, color: "#798490", marginBottom: 4 }}>
-                  {f.cat}
-                </p>
-                <h3>{f.name}</h3>
-                <p>{f.desc}</p>
-                <Link href="/cotizaciones" className="btn btn-green btn-sm">
-                  Solicitar cotización
-                </Link>
-              </article>
-            ))}
+            {FAMILIAS.map((f) => {
+              const img = FAMILY_IMAGES[f.key];
+              return (
+                <article key={f.name} className="product-card">
+                  <ProductImage src={img.src} alt={img.alt} />
+                  <p className="meta" style={{ fontSize: 12, fontWeight: 600, color: "#798490", marginBottom: 4 }}>
+                    {f.cat}
+                  </p>
+                  <h3>{f.name}</h3>
+                  <p>{f.desc}</p>
+                  <Link href="/cotizaciones" className="btn btn-green btn-sm">
+                    Solicitar cotización
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -109,22 +127,36 @@ export default function ProductosPage() {
             Mercado Libre o Amazon; para volumen B2B, cotiza con nosotros.
           </p>
           <div className="sku-list">
-            {SKUS.map((s) => (
-              <div key={s.name} className="sku-item">
-                <div>
-                  <h4>{s.name}</h4>
-                  <span className="meta">{s.cat} · Disponible a cotización</span>
+            {SKUS.map((s) => {
+              const img = SKU_IMAGES[s.name];
+              return (
+                <div key={s.name} className="sku-item">
+                  <div className="sku-item-main">
+                    {img ? (
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        width={72}
+                        height={72}
+                        className="sku-thumb"
+                      />
+                    ) : null}
+                    <div>
+                      <h4>{s.name}</h4>
+                      <span className="meta">{s.cat} · Disponible a cotización</span>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <Link href="/cotizaciones" className="btn btn-outline btn-sm">
+                      Cotizar
+                    </Link>
+                    <a href={WA} className="btn btn-green btn-sm" target="_blank" rel="noopener noreferrer">
+                      WhatsApp
+                    </a>
+                  </div>
                 </div>
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <Link href="/cotizaciones" className="btn btn-outline btn-sm">
-                    Cotizar
-                  </Link>
-                  <a href={WA} className="btn btn-green btn-sm" target="_blank" rel="noopener noreferrer">
-                    WhatsApp
-                  </a>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
