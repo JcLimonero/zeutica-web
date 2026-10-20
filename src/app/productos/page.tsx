@@ -43,7 +43,7 @@ export default function ProductosPage() {
       <div className="page-hero page-hero-photo">
         <div
           className="page-hero-bg"
-          style={{ backgroundImage: "url(/hero/teaser-catalog.webp)" }}
+          style={{ backgroundImage: "url(/hero/hero-cofias.webp)" }}
           aria-hidden
         />
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
@@ -61,7 +61,7 @@ export default function ProductosPage() {
           <div className="pdf-strip">
             <div className="pdf-strip-photo">
               <Image
-                src="/corporate/catalog-preview-2.webp"
+                src="/products/cofia-plisada-azul.webp"
                 alt="Vista previa del catálogo Zeutica"
                 width={120}
                 height={80}
